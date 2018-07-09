@@ -1,0 +1,71 @@
+
+<style>
+.center {
+    margin: auto;
+    width: 60%;
+    border: 3px solid #73AD21;
+    padding: 10px;
+}
+img {
+    float: left;
+}
+.clearfix {
+    overflow: auto;
+}
+div {
+    border: 3px solid #4CAF50;
+    padding: 5px;
+}
+</style>
+</head>
+<body>
+<h1>Confirmación de la orden</h1>
+
+<div class="clearfix">
+<img class="img2" src="https://spincommercecdn.imgix.net/103/products/8c71bb98-cd6a-4c7f-9406-40067754e67c/Imat%20Mokita.png?timestamp=1503099662?&h=480&fit=crop" align= "middle"  alt="Pineapple" width="170" height="170">
+
+<p>Nombre: 9Bar - Junior Combi</p>
+<p>Marca: 9Bar</p>
+<p>Precio: $ 480.000</p>
+</div>
+
+<%object = Order::Normal.new(
+      :uuid => "29",
+      :tbk_token_ws =>"2" ,
+      :tbk_accounting_date =>"2" ,
+      :tbk_buy_order =>"2" ,
+      :tbk_card_number => "2",
+      :tbk_commerce_code =>"2",
+      :tbk_authorization_code =>"2",
+      :tbk_payment_type_code=>"2",
+      :tbk_response_code =>"2",
+      :tbk_transaction_date=>"2",
+      :tbk_vci=>"2",
+      :tbk_session_id =>"2",
+      :tbk_card_expiration_date=>"2",
+      :tbk_shares_number =>"2",
+      :tbk_credit_card_type=>"2",
+      :tbk_transaction_id =>"1",
+      :amount => 0,
+      :status => 0)%>
+      <%object.save%>
+<% @transaction = Order::Normal.init_transaction( 480000, 2, 'aj2f4kj2'  ,"http://localhost:3000/normalorders/29/return","http://localhost:3000/normalorders/29/final")%>
+
+<%puts @transaction.token%>
+<%puts @transaction.inspect%>
+<%puts "soy url  #{@transaction.url}"%>
+
+
+<% if @transaction.success? %>
+<%puts "entre al if"%>
+
+  <%= form_tag(@transaction.url, method: :post, enforce_utf8: false, authenticity_token: false) do %>
+    <%= hidden_field_tag :token_ws, @transaction.token %>
+    <%= submit_tag("Pagar con Webpay",:style => "width:400px;") %>
+    <%puts "me presionaron?"%>
+
+  <% end %>
+   <%puts "o aqui me presionaron?"%>
+<% end %>
+</body>
+</html>

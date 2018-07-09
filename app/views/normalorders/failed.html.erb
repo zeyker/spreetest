@@ -1,0 +1,22 @@
+<h1>Failed transaction</h1>
+<p><strong>tbk_response_code</strong>: <%= @order.tbk_response_code %></p>
+
+<% case @order.tbk_response_code when "-1" %>
+
+  <p>Rechazo de transacción.</p>
+
+<%  when "-2" %>
+<p> Transacción debe reintentarse.</p>
+<%  when "-3" %>
+<p>Error en transacción.</p>
+<%  when "-4" %>
+<p>Rechazo de transacción.</p>
+<%  when "-5" %>
+<p>Rechazo por error de tasa.</p>
+<%  when "-6" %>
+<p>Excede cupo máximo mensual.</p>
+<%  when "-7" %>
+<p>Excede límite diario por transacción.</p>
+<%  when "-8" %>
+<p>Rubro no autorizado.</p>
+ <%  end %>
