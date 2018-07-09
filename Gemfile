@@ -7,6 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'pg', '~> 0.18', group: :production
 gem 'rails', '~> 5.1.4'
 gem 'webpay_rails'
 # Use sqlite3 as the database for Active Record
@@ -56,3 +57,4 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+ gem 'rails_12factor', group: :production
